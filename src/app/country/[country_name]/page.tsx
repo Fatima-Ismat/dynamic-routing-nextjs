@@ -1,10 +1,13 @@
-export default function CountryName({ params }: any) {
+interface Country {
+  name: string;
+  population: number;
+  capital: string;
+}
+
+export default function CountryName({ params }: {params: { country_name: string}}) {
   
-     const countries: { //array of objects
-    name: string;
-    population: number;
-    capital: string;
-  }[] = [
+    const countries: Country[] = [
+  
     {
       name: "Pakistan",
       population: 21000000,
@@ -34,8 +37,8 @@ export default function CountryName({ params }: any) {
 
 
 
-  function findCountry(country_url: string){
-     return countries.find(country=> country.name.toLowerCase() == country_url.toLowerCase());
+  function findCountry(country_url: string): Country | undefined {
+     return countries.find((country) => country.name.toLowerCase() === country_url.toLowerCase());
   }
 
   const result = findCountry(params.country_name);
